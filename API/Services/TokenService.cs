@@ -4,7 +4,7 @@ using System.Text;
 using API.Entities;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.Services;
+namespace API.services;
 
 public class TokenService(IConfiguration config) : ITokenService
 {
@@ -26,7 +26,6 @@ public class TokenService(IConfiguration config) : ITokenService
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        
         return tokenHandler.WriteToken(token);
     }
 }
