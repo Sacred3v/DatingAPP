@@ -3,15 +3,18 @@ using System.Text;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AccountController(DataContext context) : BaseApiController
+public class AccountController(
+    DataContext context,
+    ITokenService tokenService) : BaseApiController
 {
     [HttpPost("register")]
-    public async Task<ActionResult<AppUser>> RegisterAsync(RegisterRequest request)
+    public async Task<ActionResult<UserResponse>> RegisterAsync(RegisterRequest request)
     {
         if(await UserExistsAsync(request.Username)) return BadRequest("Username is taken");
         using var hmac = new HMACSHA512();
@@ -23,11 +26,14 @@ public class AccountController(DataContext context) : BaseApiController
 
         context.Users.Add(usr);
         await context.SaveChangesAsync();
-        return usr;
+        return new UserResponse{
+            Username = usr.UserName,
+            Token = tokenService.CreateToken(usr)
+        };
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<AppUser>> LoginAsync(LoginRequest request){
+    public async Task<ActionResult<UserResponse>> LoginAsync(LoginRequest request){
         var usr = await context.Users.FirstOrDefaultAsync(x => 
         x.UserName.ToLower() == request.Username.ToLower());
         
@@ -42,7 +48,10 @@ public class AccountController(DataContext context) : BaseApiController
             return Unauthorized("Invalid username or password");
         
 
-        return usr;
+         return new UserResponse{
+            Username = usr.UserName,
+            Token = tokenService.CreateToken(usr)
+        };
     }
 
     private async Task<bool> UserExistsAsync(string username) => 
