@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "devkit",
         "hmac",
-        "HMACSHA"
+        "HMACSHA",
+        "toastr"
     ],
     "cSpell.ignoreWords": [
         "Femx"
