@@ -1,4 +1,5 @@
 namespace API.Entities;
+using API.Extensions;
 
     public class AppUser
     {
@@ -18,7 +19,7 @@ namespace API.Entities;
       public required string City { get; set; }
       public required string Country { get; set; }
       public List<Photo> Photos { get; set; }=[];
-      
+
       public int GetAge() => Birthday.CalculateAge();
 }
     
