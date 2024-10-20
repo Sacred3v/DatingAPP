@@ -17,7 +17,8 @@ public class AccountController(
     public async Task<ActionResult<UserResponse>> RegisterAsync(RegisterRequest request)
     {
         if(await UserExistsAsync(request.Username)) return BadRequest("Username is taken");
-        using var hmac = new HMACSHA512();
+        return Ok();
+        /*using var hmac = new HMACSHA512();
         var usr = new AppUser{
             UserName = request.Username,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
@@ -29,7 +30,7 @@ public class AccountController(
         return new UserResponse{
             Username = usr.UserName,
             Token = tokenService.CreateToken(usr)
-        };
+        };*/
     }
 
     [HttpPost("login")]
