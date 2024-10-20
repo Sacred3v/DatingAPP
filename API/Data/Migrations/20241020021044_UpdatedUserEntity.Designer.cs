@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241020004526_UpdatedUserEntity")]
+    [Migration("20241020021044_UpdatedUserEntity")]
     partial class UpdatedUserEntity
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("Birthday")
+                    b.Property<DateOnly>("BirthDay")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -37,7 +37,7 @@ namespace API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")

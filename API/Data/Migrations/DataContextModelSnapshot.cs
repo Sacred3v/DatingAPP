@@ -23,7 +23,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("Birthday")
+                    b.Property<DateOnly>("BirthDay")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -34,7 +34,7 @@ namespace API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")

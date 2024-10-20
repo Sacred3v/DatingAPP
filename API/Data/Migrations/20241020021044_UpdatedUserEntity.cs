@@ -12,7 +12,7 @@ namespace API.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateOnly>(
-                name: "Birthday",
+                name: "BirthDay",
                 table: "Users",
                 type: "TEXT",
                 nullable: false,
@@ -33,7 +33,7 @@ namespace API.Data.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "CreatedAt",
+                name: "Created",
                 table: "Users",
                 type: "TEXT",
                 nullable: false,
@@ -113,7 +113,7 @@ namespace API.Data.Migrations
                 name: "Photos");
 
             migrationBuilder.DropColumn(
-                name: "Birthday",
+                name: "BirthDay",
                 table: "Users");
 
             migrationBuilder.DropColumn(
@@ -125,7 +125,7 @@ namespace API.Data.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "CreatedAt",
+                name: "Created",
                 table: "Users");
 
             migrationBuilder.DropColumn(
