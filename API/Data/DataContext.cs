@@ -1,5 +1,5 @@
 
-using API.Entities;
+using API.DataEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;

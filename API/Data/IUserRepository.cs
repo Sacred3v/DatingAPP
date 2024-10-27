@@ -1,5 +1,6 @@
 namespace API.Data;
 
+using API.DataEntities;
 public interface IUserRepository
 {
     void Update (AppUser user);

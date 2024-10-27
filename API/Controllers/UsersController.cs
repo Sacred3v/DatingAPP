@@ -1,40 +1,50 @@
+namespace API.Controllers;
 using API.Data;
-using API.Entities;
+using API.DataEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace API.Controllers;
 
 [Authorize]
 public class UsersController : BaseApiController
-    {
-        private readonly DataContext _context;
+{
+    private readonly IUserRepository _repository;
 
-    public UsersController(DataContext context)
+    public UsersController(IUserRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
-    [AllowAnonymous]
+
     [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsersAsync()
-        {
-            var users = await _context.Users.ToListAsync();
+    public async Task<ActionResult<IEnumerable<AppUser>>> GetAllAsync()
+    {
+        var users = await _repository.GetAllAsync();
 
-            return users;
-        }
-     [Authorize]
-     [HttpGet("{id:int}")]// api/users/2
-        public async  Task<ActionResult<AppUser>> GetUsersByIdAsync(int id)
-        { 
-            var users = await _context.Users.FindAsync(id);
-            if (users == null) return NotFound();
-            return users;
-        }
-    [HttpGet("{name}")]// api/v1/users/2
-        public ActionResult<string> Ready(string name)
-        { 
-            return $"Hi {name}";
-        }
+        return Ok(users);
     }
-    
+
+    [HttpGet("{id:int}")] // api/users/2
+    public async Task<ActionResult<AppUser>> GetByIdAsync(int id)
+    {
+        var user = await _repository.GetByIdAsync(id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return user;
+    }
+
+    [HttpGet("{username}")] // api/users/Calamardo
+    public async Task<ActionResult<AppUser>> GetByUsernameAsync(string username)
+    {
+        var user = await _repository.GetByUsernameAsync(username);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return user;
+    }
+}
