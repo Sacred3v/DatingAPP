@@ -1,0 +1,15 @@
+<h4>Internal server error</h4>
+@if (error) {
+    <h5 class="text-danger">Error: {{error.message}}</h5>
+    <p class="font-weight-bold">Note: This error is caused by the API, not Angular!</p>
+    <p>What to do next?</p>
+    <ol>
+        <li>Open Dev Tools and check the network tab for more information</li>
+        <li>Examine the Request URL - what API endpoint are you requesting?</li>
+        <li>Open Postman and make the same request - what happens?</li>
+    </ol>
+    <p class="font-weight-bold">Stack Trace</p>
+    <code class="mt-5" >
+        {{error.details}}
+    </code>
+}

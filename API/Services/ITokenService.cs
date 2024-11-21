@@ -1,4 +1,4 @@
-using API.Entities;
+using API.DataEntities;
 
 namespace API.services;
 
