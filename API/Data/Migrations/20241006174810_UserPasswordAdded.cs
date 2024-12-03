@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
+﻿#nullable disable
 
 namespace API.Data.Migrations
 {
+    using System.Diagnostics.CodeAnalysis;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    [ExcludeFromCodeCoverage]
     /// <inheritdoc />
     public partial class UserPasswordAdded : Migration
     {
@@ -15,14 +17,14 @@ namespace API.Data.Migrations
                 table: "Users",
                 type: "BLOB",
                 nullable: false,
-                defaultValue: new byte[0]);
+                defaultValue: Array.Empty<byte>());
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "PasswordSalt",
                 table: "Users",
                 type: "BLOB",
                 nullable: false,
-                defaultValue: new byte[0]);
+                defaultValue: Array.Empty<byte>());
         }
 
         /// <inheritdoc />
